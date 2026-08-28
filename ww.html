@@ -1,0 +1,1031 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ru" data-gif-theme="ursa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Переводчик Хазик Центр Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <style>
+    :root {
+      --md-sys-color-primary: #d0bcff;
+      --md-sys-color-shit: #b190ff;
+      --md-sys-color-shit-light: #c8b0ff;
+      --md-sys-color-on-primary: #220a32;
+      --md-sys-color-primary-container: #4f378b;
+      --md-sys-color-on-primary-container: #f4e7ff;
+      --md-sys-color-secondary: #ccc2dc;
+      --md-sys-color-on-secondary: #332d41;
+      --md-sys-color-secondary-container: #4a4458;
+      --md-sys-color-on-secondary-container: #e8def8;
+      --md-sys-color-surface: #141218;
+      --md-sys-color-on-surface: #e6e0e9;
+      --md-sys-color-on-surface-variant: #cac4d0;
+      --md-sys-color-surface-variant: #49454f;
+      --md-sys-color-outline: #938f99;
+      --md-sys-color-surface-container-low: #1d1b20;
+      --md-sys-color-surface-container: #211f26;
+      --md-sys-color-surface-container-high: #2b2930;
+      --md-sys-color-surface-container-highest: #36343b;
+      --md-sys-color-error: #ffb4ab;
+      --md-sys-color-on-error: #690005;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: pan-x pan-y;
+      background-color: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    header {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--md-sys-color-surface-container-low);
+      border-bottom: 1px solid var(--md-sys-color-surface-variant);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 50;
+    }
+
+    .brand-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--md-sys-color-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title .badge {
+      font-size: 11px;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+
+    .swap-btn-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      padding: 6px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .swap-btn-header:hover {
+      background: var(--md-sys-color-surface-container-highest);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .swap-btn-header:active {
+      transform: scale(0.96);
+    }
+
+    .swap-btn-header .material-symbols-rounded {
+      font-size: 18px;
+      color: var(--md-sys-color-primary);
+    }
+
+    .menu-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .menu-btn:hover {
+      background-color: var(--md-sys-color-surface-container-highest);
+    }
+
+    .menu-btn:active {
+      transform: scale(0.92);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 310px;
+      background: var(--md-sys-color-surface-container-highest);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--md-sys-color-surface-variant);
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+      animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dropdown-menu.active {
+      display: flex;
+    }
+
+    .dropdown-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--md-sys-color-primary);
+      font-weight: 700;
+      padding: 2px 6px;
+    }
+
+    .mode-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--md-sys-color-surface-container);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-item:hover {
+      background: var(--md-sys-color-surface-container-high);
+    }
+
+    .mode-item.active {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+    }
+
+    .mode-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      padding-right: 8px;
+    }
+
+    .mode-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .mode-desc {
+      font-size: 11px;
+      color: var(--md-sys-color-on-surface-variant);
+      line-height: 1.3;
+    }
+
+    .mode-item.active .mode-desc {
+      color: var(--md-sys-color-on-primary-container);
+      opacity: 0.8;
+    }
+
+    .radio-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--md-sys-color-outline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mode-item.active .radio-circle {
+      border-color: var(--md-sys-color-primary);
+      background: var(--md-sys-color-primary);
+    }
+
+    .radio-inner {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--md-sys-color-on-primary);
+      display: none;
+    }
+
+    .mode-item.active .radio-inner {
+      display: block;
+    }
+
+    .slider-box {
+      background: var(--md-sys-color-surface-container);
+      padding: 10px 12px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .slider-val {
+      color: var(--md-sys-color-primary);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 13px;
+    }
+
+    .distance-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--md-sys-color-surface-variant);
+      outline: none;
+    }
+
+    .distance-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--md-sys-color-primary);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.1s;
+    }
+
+    .distance-slider::-webkit-slider-thumb:active {
+      transform: scale(1.2);
+    }
+
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 14px 16px;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .active-mode-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--md-sys-color-surface-container-high);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--md-sys-color-on-surface-variant);
+      align-self: flex-start;
+      border: 1px solid var(--md-sys-color-surface-container-highest);
+    }
+
+    .active-mode-badge .material-symbols-rounded {
+      font-size: 16px;
+      color: var(--md-sys-color-primary);
+    }
+
+    .panels-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .panel {
+      background-color: var(--md-sys-color-surface-container);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--md-sys-color-surface-container-high);
+      min-height: 0;
+    }
+
+    .panel-header {
+      padding: 10px 16px;
+      background: var(--md-sys-color-surface-container-high);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .panel-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--md-sys-color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .panel-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--md-sys-color-on-surface-variant);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: var(--md-sys-color-surface-container-highest);
+      color: var(--md-sys-color-primary);
+    }
+
+    .icon-btn .material-symbols-rounded {
+      font-size: 18px;
+    }
+
+    .text-box-wrapper {
+      flex: 1;
+      position: relative;
+      min-height: 0;
+      display: flex;
+    }
+
+    .custom-textarea {
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--md-sys-color-on-surface);
+      font-family: inherit;
+      font-size: 15px;
+      line-height: 1.6;
+      resize: none;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--md-sys-color-outline) transparent;
+      -webkit-user-select: text !important;
+      user-select: text !important;
+    }
+
+    .custom-textarea::placeholder {
+      color: var(--md-sys-color-outline);
+      user-select: none;
+    }
+
+    .custom-textarea::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-textarea::-webkit-scrollbar-thumb {
+      background: var(--md-sys-color-surface-variant);
+      border-radius: 4px;
+    }
+
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 14px 20px;
+      background-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      border: none;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s, transform 0.1s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-btn:hover {
+      background-color: var(--md-sys-color-shit-light);
+    }
+
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+
+    .action-btn .material-symbols-rounded {
+      font-size: 20px;
+    }
+
+    .randomize-btn {
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+      border: 1px solid var(--md-sys-color-surface-variant);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .randomize-btn:hover {
+      background-color: var(--md-sys-color-surface-container-highest);
+      color: var(--md-sys-color-primary);
+    }
+
+    footer {
+      padding: 10px 20px;
+      background: var(--md-sys-color-surface-container-low);
+      font-size: 12px;
+      color: var(--md-sys-color-outline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      border-top: 1px solid var(--md-sys-color-surface-variant);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--md-sys-color-surface-container-highest);
+      color: var(--md-sys-color-on-surface);
+      border: 1px solid var(--md-sys-color-primary);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .panels-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+      .dropdown-menu {
+        width: calc(100vw - 32px);
+        right: -8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>Хазик Центр</span>
+      <span class="badge">PRO AI</span>
+    </div>
+
+    <div class="header-right">
+      <button class="swap-btn-header" id="swapLangBtn" title="Поменять направление перевода">
+        <span class="material-symbols-rounded" id="swapIcon">sync_alt</span>
+        <span id="swapText">RU → ХАЗИК</span>
+      </button>
+
+      <button class="menu-btn" id="menuToggleBtn" title="Режимы работы">
+        <span class="material-symbols-rounded">more_vert</span>
+      </button>
+
+      <!-- 3-Dots Dropdown Menu -->
+      <div class="dropdown-menu" id="dropdownMenu">
+        <div class="dropdown-title">Режимы перевода</div>
+        
+        <div class="mode-item active" data-mode="normal" id="modeNormal">
+          <div class="mode-info">
+            <span class="mode-name">Обычный Хазик</span>
+            <span class="mode-desc">Базовый прогрев и каноничный словарь</span>
+          </div>
+          <div class="radio-circle"><div class="radio-inner"></div></div>
+        </div>
+
+        <div class="mode-item" data-mode="literary" id="modeLiterary">
+          <div class="mode-info">
+            <span class="mode-name">1. Хазико-писания</span>
+            <span class="mode-desc">Расширяет предложения новыми словами и эпитетами по смыслу</span>
+          </div>
+          <div class="radio-circle"><div class="radio-inner"></div></div>
+        </div>
+
+        <div class="mode-item" data-mode="oleg" id="modeOleg">
+          <div class="mode-info">
+            <span class="mode-name">3. Олег печатает</span>
+            <span class="mode-desc">Словарный запас: 24 мкр, узбеки, тт нашел, Андрей, за братву...</span>
+          </div>
+          <div class="radio-circle"><div class="radio-inner"></div></div>
+        </div>
+
+        <div class="dropdown-title">2. Расстояние от центра</div>
+        <div class="slider-box">
+          <div class="slider-header">
+            <span>Дистанция:</span>
+            <span class="slider-val" id="distanceVal">0 м</span>
+          </div>
+          <input type="range" class="distance-slider" id="distanceSlider" min="0" max="10000" step="100" value="0">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <div class="active-mode-badge" id="activeModeLabel">
+      <span class="material-symbols-rounded">tune</span>
+      <span id="activeModeText">Режим: Обычный Хазик (0 м от центра)</span>
+    </div>
+
+    <div class="panels-container">
+      <!-- Input Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-tag" id="inputTag">Русский</span>
+          <div class="panel-actions">
+            <button class="icon-btn" id="clearBtn" title="Очистить">
+              <span class="material-symbols-rounded">clear</span>
+            </button>
+          </div>
+        </div>
+        <div class="text-box-wrapper">
+          <textarea id="inputText" class="custom-textarea" placeholder="Напиши текст для перевода..."></textarea>
+        </div>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-tag" id="outputTag">Хазик Центр</span>
+          <div class="panel-actions">
+            <button class="icon-btn" id="copyBtn" title="Скопировать результат">
+              <span class="material-symbols-rounded">content_copy</span>
+            </button>
+          </div>
+        </div>
+        <div class="text-box-wrapper">
+          <textarea id="outputText" class="custom-textarea" readonly placeholder="Здесь появится перевод..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-bar">
+      <button class="randomize-btn" id="randomizeBtn" title="Случайная фраза">
+        <span class="material-symbols-rounded">shuffle</span>
+        <span>Пример</span>
+      </button>
+      <button class="action-btn" id="translateBtn">
+        <span class="material-symbols-rounded">translate</span>
+        <span id="translateBtnText">Перевести на Хазик Центр</span>
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <span>Генеративный диалект v3.0 Pro</span>
+    <span>Хазик Центр Engine</span>
+  </footer>
+
+  <div id="toast" class="toast">Текст скопирован в буфер!</div>
+
+  <script>
+    // Запрет зума и паразитных жестов
+    document.addEventListener('gesturestart', (e) => e.preventDefault());
+    document.addEventListener('dblclick', (e) => e.preventDefault());
+
+    // Состояние приложения
+    let currentDirection = 'ru_to_khazik';
+    let currentMode = 'normal';
+    let currentDistance = 0;
+
+    // Словари
+    const VERB_CHAIN = ["гоу", "хазик", "газанем", "поехали", "выезжаем"];
+
+    const BEINGS = [
+      "карп", "карпы", "морская свинка", "альтухи", "нефоры", 
+      "бомжи", "лехач", "краб с камчатки", "маленький LIL", "большой BIG"
+    ];
+
+    const BASE_SLANG = [
+      "центр", "прогрев", "WW", "по талончикам", "варить пельмени",
+      "хазомёт", "в сочи", "море", "пляж", "бессоные ночи", "тамам",
+      "еду быстро", "флекшу низко", "я молодой пацан", "67",
+      "средний medium", "rare прожарка"
+    ];
+
+    const OLEG_VOCAB = [
+      "тт нашел", "колонизация пошла", "24 мкр", "за братву горой",
+      "Андрей", "ебало разобью", "хватит гнить", "в компьютере",
+      "ровный пацан", "узбеки"
+    ];
+
+    const LITERARY_EXPANSIONS = [
+      "чисто по кайфу", "где краб с камчатки плавает", "в эпицентре прогрева",
+      "пока альтухи варят пельмени", "держа хазомёт наготове",
+      "на скорости 67 км/ч", "в режиме rare прожарки", "на 24 мкр",
+      "раздавая тамам налево и направо", "пока узбеки флексят низко"
+    ];
+
+    // Обратный словарь
+    const KHAZIK_TO_RU_MAP = {
+      "гоу": "пойдём",
+      "хазик": "зайдём",
+      "газанем": "побежим",
+      "поехали": "отправимся",
+      "выезжаем": "выдвигаемся",
+      "центр": "город",
+      "карп": "человек",
+      "карпы": "люди",
+      "лехач": "парень",
+      "альтухи": "девушки",
+      "нефоры": "знакомые",
+      "бомжи": "прохожие",
+      "морскую свинку": "питомца",
+      "морская свинка": "питомец",
+      "прогрев": "движение",
+      "варить пельмени": "готовить обед",
+      "по талончикам": "по очереди",
+      "ww": "победа",
+      "хазомёт": "аргумент",
+      "тамам": "хорошо",
+      "краб с камчатки": "гость",
+      "еду быстро": "спешу",
+      "флекшу низко": "отдыхаю",
+      "я молодой пацан": "я готов",
+      "67": "быстро",
+      "маленький lil": "младший",
+      "большой big": "старший",
+      "средний medium": "обычный",
+      "rare прожарка": "максимальный уровень",
+      "24 мкр": "район",
+      "узбеки": "бригада",
+      "тт нашел": "нашел тему",
+      "колонизация пошла": "дело пошло",
+      "за братву горой": "надежно",
+      "андрей": "наш человек",
+      "ебало разобью": "строго порешаю",
+      "хватит гнить": "хватит сидеть",
+      "в компьютере": "дома",
+      "ровный пацан": "надежный друг"
+    };
+
+    const VERB_ROOTS = [
+      "пойд", "идти", "идем", "пошел", "пошли", "купи", "беж", "дел", "дела",
+      "гуля", "встрет", "смотр", "лета", "ед", "еха", "сид", "сто", "дума",
+      "сказ", "говор", "погнал", "погнали", "гон", "леж", "пиш", "чит", "взя", "хот"
+    ];
+
+    const SAMPLE_PHRASES_RU = [
+      "Пойдем завтра в школу, потом зайдем в магазин и покормим кота.",
+      "Друг сказал, что мы поедем на работу и будем варить обед.",
+      "Мы хотим пойти на тусовку, встретить знакомых и купить лимонад.",
+      "Пацаны собрались на районе, взяли кофе и поехали отдыхать на пляж."
+    ];
+
+    const SAMPLE_PHRASES_KHAZIK = [
+      "Гоу завтра в центр, потом хазик в WW и покормим карпа.",
+      "Лехач сказал, что мы газанем в 24 мкр и поехали варить пельмени.",
+      "Альтухи выезжают в сочи, тамам и rare прожарка по талончикам."
+    ];
+
+    function isVerb(word) {
+      const w = word.toLowerCase();
+      if (w.length < 3) return false;
+      if (VERB_ROOTS.some(root => w.startsWith(root))) return true;
+      return /(ть|ти|л|ла|ло|ли|ем|им|ете|ите|ут|ют|ат|ят|ешь|ишь|у|ю|й|йте|дем|дим)$/i.test(w);
+    }
+
+    function isLivingBeing(word) {
+      const w = word.toLowerCase();
+      const list = [
+        "кот", "кота", "коты", "собака", "собаку", "пес", "человек", "люди", 
+        "друг", "друга", "брат", "мама", "папа", "учитель", "пацан", "девушка", 
+        "тимур", "никита", "дмитрий", "леха", "антон", "арстан", "рыба", "хомяк",
+        "животное", "зверь", "птица", "пацаны", "ребята"
+      ];
+      return list.includes(w) || (/^[А-ЯЁ]/.test(word) && word.length > 2);
+    }
+
+    function isService(word) {
+      return /^(в|на|с|со|к|ко|под|за|из|по|от|у|о|об|и|а|но|да|или|же|ли|бы)$/i.test(word);
+    }
+
+    function matchCase(source, target) {
+      if (!source || !target) return target;
+      if (source === source.toUpperCase()) return target.toUpperCase();
+      if (source[0] === source[0].toUpperCase()) {
+        return target.charAt(0).toUpperCase() + target.slice(1);
+      }
+      return target.toLowerCase();
+    }
+
+    // Перевод RU -> Khazik
+    function translateRuToKhazik(text) {
+      if (!text.trim()) return "";
+
+      const sentences = text.split(/([.!?\n]+)/);
+      let translated = "";
+      const distanceFactor = Math.max(0.12, 0.95 - (currentDistance / 10000) * 0.83);
+      let atLeastOneChanged = false;
+
+      for (let s = 0; s < sentences.length; s++) {
+        const segment = sentences[s];
+        if (!segment.trim() || /^[.!?\n]+$/.test(segment)) {
+          translated += segment;
+          continue;
+        }
+
+        const tokens = segment.split(/(\s+|[.,\/#!$%\^&\*;:{}=\-_`~()?"'])/);
+        let verbCounter = 0;
+        let sentenceTranslated = "";
+
+        for (let i = 0; i < tokens.length; i++) {
+          const token = tokens[i];
+          if (!token || /^\s+$/.test(token) || /^[.,\/#!$%\^&\*;:{}=\-_`~()?"']+$/.test(token) || isService(token)) {
+            sentenceTranslated += token;
+            continue;
+          }
+
+          const cleanWord = token.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, "");
+          if (!cleanWord) {
+            sentenceTranslated += token;
+            continue;
+          }
+
+          const allowTransform = Math.random() < distanceFactor;
+          if (!allowTransform) {
+            sentenceTranslated += token;
+            continue;
+          }
+
+          atLeastOneChanged = true;
+
+          // 1. Глаголы
+          if (isVerb(cleanWord)) {
+            const verbIndex = verbCounter % VERB_CHAIN.length;
+            const chosenVerb = VERB_CHAIN[verbIndex];
+            verbCounter++;
+            sentenceTranslated += matchCase(cleanWord, chosenVerb);
+            continue;
+          }
+
+          // 2. Живые существа / Имена
+          if (isLivingBeing(cleanWord)) {
+            let beingPool = [...BEINGS];
+            if (currentMode === 'oleg') {
+              beingPool.push("Андрей", "узбеки", "ровный пацан");
+            }
+            const chosenBeing = beingPool[Math.floor(Math.random() * beingPool.length)];
+            sentenceTranslated += matchCase(cleanWord, chosenBeing);
+            continue;
+          }
+
+          // 3. Существительные и прочее
+          let slangPool = [...BASE_SLANG];
+          if (currentMode === 'oleg') {
+            slangPool = slangPool.concat(OLEG_VOCAB);
+          }
+
+          const rand = Math.random();
+          if (rand < 0.4) {
+            sentenceTranslated += matchCase(cleanWord, "центр");
+          } else {
+            const slang = slangPool[Math.floor(Math.random() * slangPool.length)];
+            sentenceTranslated += matchCase(cleanWord, slang);
+          }
+        }
+
+        if (currentMode === 'literary') {
+          const expansion = LITERARY_EXPANSIONS[Math.floor(Math.random() * LITERARY_EXPANSIONS.length)];
+          sentenceTranslated = sentenceTranslated.trimEnd() + ", " + expansion;
+        }
+
+        translated += sentenceTranslated;
+      }
+
+      if (!atLeastOneChanged && text.trim().length > 0) {
+        translated = translated.replace(/(\b[а-яА-ЯёЁ]{3,}\b)/, (w) => matchCase(w, "центр"));
+      }
+
+      return translated;
+    }
+
+    // Перевод Khazik -> RU
+    function translateKhazikToRu(text) {
+      if (!text.trim()) return "";
+
+      let res = text;
+      const keys = Object.keys(KHAZIK_TO_RU_MAP).sort((a, b) => b.length - a.length);
+
+      keys.forEach(k => {
+        const regex = new RegExp('(^|[^а-яА-ЯёЁa-zA-Z0-9])' + k + '([^а-яА-ЯёЁa-zA-Z0-9]|$)', 'gi');
+        res = res.replace(regex, (match, p1, p2) => {
+          const target = KHAZIK_TO_RU_MAP[k.toLowerCase()] || k;
+          return p1 + target + p2;
+        });
+      });
+
+      return res;
+    }
+
+    // UI Элементы
+    const inputArea = document.getElementById("inputText");
+    const outputArea = document.getElementById("outputText");
+    const translateBtn = document.getElementById("translateBtn");
+    const translateBtnText = document.getElementById("translateBtnText");
+    const clearBtn = document.getElementById("clearBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const randomizeBtn = document.getElementById("randomizeBtn");
+    const toast = document.getElementById("toast");
+
+    const swapLangBtn = document.getElementById("swapLangBtn");
+    const swapText = document.getElementById("swapText");
+    const inputTag = document.getElementById("inputTag");
+    const outputTag = document.getElementById("outputTag");
+
+    const menuToggleBtn = document.getElementById("menuToggleBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const distanceSlider = document.getElementById("distanceSlider");
+    const distanceVal = document.getElementById("distanceVal");
+    const activeModeText = document.getElementById("activeModeText");
+
+    function runTranslation() {
+      const src = inputArea.value;
+      if (currentDirection === 'ru_to_khazik') {
+        outputArea.value = translateRuToKhazik(src);
+      } else {
+        outputArea.value = translateKhazikToRu(src);
+      }
+    }
+
+    function updateBadge() {
+      let modeName = "Обычный Хазик";
+      if (currentMode === 'literary') modeName = "Хазико-писания";
+      if (currentMode === 'oleg') modeName = "Олег печатает";
+      activeModeText.textContent = `Режим: ${modeName} (${currentDistance} м от центра)`;
+    }
+
+    // Реверс языка
+    swapLangBtn.addEventListener("click", () => {
+      if (currentDirection === 'ru_to_khazik') {
+        currentDirection = 'khazik_to_ru';
+        swapText.textContent = "ХАЗИК → RU";
+        inputTag.textContent = "Хазик Центр";
+        outputTag.textContent = "Русский";
+        translateBtnText.textContent = "Перевести на Русский";
+        inputArea.placeholder = "Напиши текст на языке Хазик Центр...";
+      } else {
+        currentDirection = 'ru_to_khazik';
+        swapText.textContent = "RU → ХАЗИК";
+        inputTag.textContent = "Русский";
+        outputTag.textContent = "Хазик Центр";
+        translateBtnText.textContent = "Перевести на Хазик Центр";
+        inputArea.placeholder = "Напиши текст для перевода...";
+      }
+
+      const oldOut = outputArea.value;
+      if (oldOut) {
+        inputArea.value = oldOut;
+      }
+      runTranslation();
+    });
+
+    // Открытие/закрытие меню
+    menuToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdownMenu.contains(e.target) && e.target !== menuToggleBtn) {
+        dropdownMenu.classList.remove("active");
+      }
+    });
+
+    // Режимы
+    const modes = [
+      { id: 'modeNormal', mode: 'normal' },
+      { id: 'modeLiterary', mode: 'literary' },
+      { id: 'modeOleg', mode: 'oleg' }
+    ];
+
+    modes.forEach(item => {
+      const el = document.getElementById(item.id);
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        modes.forEach(m => document.getElementById(m.id).classList.remove("active"));
+        el.classList.add("active");
+        currentMode = item.mode;
+        updateBadge();
+        runTranslation();
+      });
+    });
+
+    // Ползунок дистанции
+    distanceSlider.addEventListener("input", (e) => {
+      currentDistance = parseInt(e.target.value, 10);
+      distanceVal.textContent = currentDistance + " м";
+      updateBadge();
+      runTranslation();
+    });
+
+    // Обработчики кнопок
+    inputArea.addEventListener("input", runTranslation);
+    translateBtn.addEventListener("click", runTranslation);
+
+    clearBtn.addEventListener("click", () => {
+      inputArea.value = "";
+      outputArea.value = "";
+      inputArea.focus();
+    });
+
+    randomizeBtn.addEventListener("click", () => {
+      if (currentDirection === 'ru_to_khazik') {
+        inputArea.value = SAMPLE_PHRASES_RU[Math.floor(Math.random() * SAMPLE_PHRASES_RU.length)];
+      } else {
+        inputArea.value = SAMPLE_PHRASES_KHAZIK[Math.floor(Math.random() * SAMPLE_PHRASES_KHAZIK.length)];
+      }
+      runTranslation();
+    });
+
+    copyBtn.addEventListener("click", () => {
+      if (!outputArea.value) return;
+      navigator.clipboard.writeText(outputArea.value).then(() => {
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      });
+    });
+  </script>
+</body>
+</html>
