@@ -2,14 +2,14 @@
 
 # ouKhazik (Хазик Центр PRO AI) 🚀
 
-[![GitHub Stars](https://img.shields.io/github/stars/your-username/ouKhazik?style=for-the-badge&color=d0bcff&logo=github)](https://github.com/your-username/ouKhazik/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/your-username/ouKhazik?style=for-the-badge&color=b190ff&logo=github)](https://github.com/your-username/ouKhazik/network/members)
-[![Last Commit](https://img.shields.io/github/last-commit/your-username/ouKhazik?style=for-the-badge&color=4f378b&logo=git)](https://github.com/your-username/ouKhazik/commits/main)
+[![GitHub Stars](https://img.shields.io/github/stars/oulan1/Translator?style=for-the-badge&color=d0bcff&logo=github)](https://github.com/oulan1/Translator/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/oulan1/Translator?style=for-the-badge&color=b190ff&logo=github)](https://github.com/oulan1/Translator/network/members)
+[![Last Commit](https://img.shields.io/github/last-commit/oulan1/Translator?style=for-the-badge&color=4f378b&logo=git)](https://github.com/oulan1/Translator/commits/main)
 [![License](https://img.shields.io/badge/License-MIT-blueviolet?style=for-the-badge)](LICENSE)
 
 **Первый в мире нейро-генеративный транслятор с русского на каноничный диалект «Хазик Центр» и обратно.**
 
-[🚀 Демо онлайн](https://your-username.github.io/ouKhazik/) • [✨ Баги и фичи](https://github.com/your-username/ouKhazik/issues)
+[🚀 Демо онлайн](https://oulan1.github.io/Translator/) • [✨ Сообщить о баге](https://github.com/oulan1/Translator/issues)
 
 </div>
 
